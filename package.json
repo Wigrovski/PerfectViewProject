@@ -1,13 +1,15 @@
 {
-  "name": "perfectview",
+  "name": "webpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "watch": "webpack --watch --mode=development"
+    "watch": "webpack --watch --mode=development",
+    "start": "webpack serve --mode=development --open"
+    
   },
-  "author": "",
+  "author": "Kobelev Aleksandr",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^5.75.0",

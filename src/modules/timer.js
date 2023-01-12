@@ -10,8 +10,8 @@ const timer = (deadline) => {
         let dateNow = new Date().getTime()
         let timeRemaining = (dateStop - dateNow)/1000
         let days = 'Дней: ' + Math.floor(timeRemaining / 60 / 60 / 24) 
-        let hours = Math.floor(timeRemaining / 60 / 60)
-        let minutes = Math.floor((timeRemaining / 60 % 60))
+        let hours = Math.floor((timeRemaining / 60 / 60 % 24))
+        let minutes = Math.floor((timeRemaining / 60) % 60)
         let seconds = Math.floor(timeRemaining % 60)
         
         return {timeRemaining, days, hours, minutes, seconds}
@@ -24,19 +24,12 @@ const timer = (deadline) => {
         timerSeconds.textContent = getTime.seconds >= 10 ? getTime.seconds : `0${getTime.seconds}`
         
     }
-    const checkTime = () => {
+    timeInterval = setInterval( () => {
         let getTime = getTimeRemaining()
         if(getTime.timeRemaining > 0) {
             showTimer()
-        } else { clearInterval(timeInterval)}
-    }
-
-    const updateClock = () => {
-        checkTime()
-        timeInterval = setInterval(updateClock, 1000)
-    }
-    updateClock()
-    
+        } else { clearInterval(timeInterval), 1000}    
+}, 1000)
 }
 
 export default timer
