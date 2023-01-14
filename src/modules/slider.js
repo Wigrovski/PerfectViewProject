@@ -11,7 +11,7 @@ const slider = () => {
         dot.classList.add('dot');
         dotsBlock.append(dot)}
         const dots = document.querySelectorAll('.dot')
-        dots[0].classList.toggle('dot-active')
+        dots[0].classList.add('dot-active')
 
     
     const prevSlide = (elems, index,strClass) => {
@@ -65,7 +65,7 @@ const slider = () => {
             currentSlide = 0
         }
 
-        if (currentSlide  < slides.length) {
+        if (currentSlide  < 0) {
             currentSlide = slides.length - 1
         }
 
@@ -81,7 +81,6 @@ const slider = () => {
     }, true)
 
     sliderBlock.addEventListener('mouseleave', (e) => {
-        e.preventDefault()
         if (e.target.matches('.dot, .portfolio-btn')) {
             startSlide(timeInterval)
         }
