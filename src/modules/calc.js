@@ -31,7 +31,7 @@ const calc = (price = 1000) => {
             totalValue = 0
         }
 
-        total.textContent = totalValue
+        total.textContent = Math.round(totalValue)
 
     }
 

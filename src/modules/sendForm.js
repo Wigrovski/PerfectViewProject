@@ -31,7 +31,7 @@ const sendForm = ({formId, someElem = []}) => {
     }
 
     const submitForm = () => {
-        const formElement = document.querySelectorAll('input')
+        const formElement = form.querySelectorAll('input')
         const formData = new FormData(form)
         const formBody = {}
 
@@ -52,9 +52,9 @@ const sendForm = ({formId, someElem = []}) => {
         }) 
 
         if (validate(formElement)) {
-            sendData(formBody).then((data) => {
+            sendData(formBody).then(data => {
                 statusBlock.textContent = successText
-                formElement.forEach((input) => {
+                formElement.forEach(input => {
                     input.value = ''
                 })
             })
