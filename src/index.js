@@ -9,13 +9,13 @@ import sendForm from './modules/sendForm'
 
 
 
-timer('16 january 2023')
+timer('17 january 2023')
 menu()
 modal()
 validform()
 tabs()
 slider()
-calc(1000)
+calc(100)
 sendForm({
     formId: 'form1',
     someElem: [

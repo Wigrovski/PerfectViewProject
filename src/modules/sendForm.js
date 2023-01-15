@@ -10,12 +10,28 @@ const sendForm = ({formId, someElem = []}) => {
     const validate = (list) => {
         let success = true
 
-        list.forEach((input) => {
-            if (
-                ((input.type === "text") && (input.value.length < 2)) ||
-                ((input.type === "email") && ((!input.value.includes('@') || (!input.value.includes('.'))))) ||
-                ((input.type === "tel") && ((input.value.length < 11)))) {
-                success = false
+        list.forEach((item) => {
+            if (item.classList.contains('form-email')) {
+                if (!item.value.match(/.+@.+\..+/gi)) {
+                    success = false;
+                    return false;
+                }
+            } else if (item.classList.contains('form-phone')) {
+                if (!item.value.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,}$/gi)) {
+                    success = false;
+                    return false;
+                }
+            } else if (item.classList.contains('form-name') || item.classList.contains('top-form')) {
+                if (!item.value.match(/^[а-яА-Я][а-яА-Я- ]+[а-яА-Я]?$/g)) {
+                    success = false;
+                    return false;
+                }
+            } else if (item.classList.contains('mess')) {
+                if (item.value.match(/[a-zA-Z'][a-zA-Z']+[a-zA-Z']?$/gi)) {
+                    success = false;
+                    console.log(item);
+                    return false;
+                }
             }
         })
         return success
@@ -40,15 +56,21 @@ const sendForm = ({formId, someElem = []}) => {
         form.append(statusBlock)
 
         formData.forEach((val, key) => {
-            formBody[key] = val
+            if(val.length !== 0) {
+                formBody[key] = val
+            }
         })
 
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id)
             if (elem.type === 'block') {
-                formBody[elem.id] = element.textContent
+                if (element.textContent !== '0') {
+                    formBody[elem.id] = element.textContent
+                }
             } else if (elem.type === 'input') {
-                formBody[elem.id] = element.value
+                if (element.value !== '0') {
+                    formBody[elem.id] = element.value
+                }
             }
         }) 
 

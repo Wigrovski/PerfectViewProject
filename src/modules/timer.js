@@ -18,18 +18,22 @@ const timer = (deadline) => {
     }
     function showTimer(days, hours, minutes, seconds) {
         let getTime = getTimeRemaining()
+        if (getTime.timeRemaining <= 0){
+            clearInterval(timeInterval)
+            timerDays.textContent = '00'
+            timerHours.textContent = '00'
+            timerMinutes.textContent = '00'
+            timerSeconds.textContent = '00'
+            return
+        }
         timerDays.textContent = getTime.days
         timerHours.textContent = getTime.hours >= 10 ? getTime.hours : `0${getTime.hours}`
         timerMinutes.textContent = getTime.minutes >= 10 ? getTime.minutes : `0${getTime.minutes}`
         timerSeconds.textContent = getTime.seconds >= 10 ? getTime.seconds : `0${getTime.seconds}`
         
     }
-    timeInterval = setInterval( () => {
-        let getTime = getTimeRemaining()
-        if(getTime.timeRemaining > 0) {
-            showTimer()
-        } else { clearInterval(timeInterval), 1000}    
-}, 1000)
+    showTimer()
+    timeInterval = setInterval(showTimer, 1000)
 }
 
 export default timer
