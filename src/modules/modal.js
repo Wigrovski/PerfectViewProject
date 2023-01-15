@@ -34,7 +34,6 @@ const modal = () => {
             modal.style.transition = ''
         }
     })
-
 }
 
 export default modal
