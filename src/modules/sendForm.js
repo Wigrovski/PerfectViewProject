@@ -6,6 +6,7 @@ const sendForm = ({formId, someElem = []}) => {
     const successText = 'Спасибо наш менеджер свяжется с вами'
 
 
+
     const validate = (list) => {
         let success = true
 
@@ -13,7 +14,7 @@ const sendForm = ({formId, someElem = []}) => {
             if (
                 ((input.type === "text") && (input.value.length < 2)) ||
                 ((input.type === "email") && ((!input.value.includes('@') || (!input.value.includes('.'))))) ||
-                ((input.type === "tel") && ((input.value.length < 12)))) {
+                ((input.type === "tel") && ((input.value.length < 11)))) {
                 success = false
             }
         })
@@ -53,12 +54,14 @@ const sendForm = ({formId, someElem = []}) => {
 
         if (validate(formElement)) {
             sendData(formBody).then(data => {
+                statusBlock.style.color = '#ffff'
                 statusBlock.textContent = successText
                 formElement.forEach(input => {
                     input.value = ''
                 })
             })
             .catch ((error) => {
+                statusBlock.style.color = '#ffff'
                 statusBlock.textContent = errorText
             })
         } else { 
